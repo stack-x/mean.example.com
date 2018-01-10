@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  h1 Edit a User
+
+  form(id='createUser', action='/api/users/edit', method='post')
+    div
+      label(for='_id') User Id
+      input(type='text', name='_id', id='_id')
+        
+    div
+      label(for='username') Username
+      input(type='text', name='username', id='username')
+        
+    div
+      label(for='email') Email
+      input(type='text', name='email', id='email')
+
+    div
+      label(for='first_name') First Name
+      input(type='text', name='first_name', id='first_name')
+        
+    div
+      label(for='last_name') Last Name
+      input(type='text', name='last_name', id='last_name')
+        
+    div
+      input(type='submit', value='Submit')
