@@ -72,7 +72,8 @@ app.use(function(req,res,next){
     '/',
     '/public',
     '/users/login',
-    '/users/register'
+    '/users/register',
+    '/api/users/register'
   ];
 
   if(whitelist.indexOf(req.url) !== -1){
