@@ -154,8 +154,7 @@ function createUser(){
         <input type="text" name="last_name" id="last_name">
       </div>
       <input type="submit" value="Submit">
-    </form>
-  `;
+    </form>`;
 
   var createUser = document.getElementById('createUser');
   createUser.addEventListener('submit', function(e){
@@ -189,7 +188,6 @@ function createUser(){
 
 //Onload view index
 viewIndex();
-
 //If the inital page load has a hash, look up that user
 var hash = window.location.hash.substr(1);
 if(hash){

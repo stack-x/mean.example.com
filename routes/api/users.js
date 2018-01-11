@@ -89,4 +89,22 @@ router.get('/delete/:userId', function(req,res){
   });
 });
 
+router.post('/register', function(req,res){
+
+  var input = req.body;
+  User.register(new User({
+    username: input.username,
+    email: input.email,
+    first_name: input.first_name,
+    last_name: input.last_name
+  }), input.password, function(err, user){
+    if(err){
+      return res.json({success: false, user: req.body, errors: err});
+    }
+
+    return res.json({success: true, user: user});
+  });
+
+});
+
 module.exports = router;

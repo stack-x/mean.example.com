@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
+  passportLocalMongoose = require('passport-local-mongoose');
 
 //Create a schema
 var User = new Schema({
@@ -19,5 +20,7 @@ var User = new Schema({
     default: false
   }
 });
+
+User.plugin(passportLocalMongoose);
 
 module.exports  = mongoose.model('User', User);
