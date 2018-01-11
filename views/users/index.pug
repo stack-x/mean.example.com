@@ -3,6 +3,10 @@ extends ../layout
 block content
   h1= title
 
-  div#users
+  a.button(href="#users" onclick="viewIndex()") All Users
+  span &nbsp;&nbsp;
+  a.button(href="#create" onclick="createUser()") Create
 
-  div#userPanel
+  div#app
+    
+  script(src='/javascripts/user_app.js')
