@@ -63,3 +63,11 @@ a.button {
   -moz-appearance: button;
   appearance: button;
 }
+
+.delete {
+  text-align: right;
+}
+
+.delete a{
+  color: #ff0000;
+}

@@ -92,6 +92,9 @@ function viewUser(who){
         </div>
         <input type="submit" value="Submit">
       </form>
+      <div class="delete">
+        <a href="#delete" onclick="deleteUser('${data.user[0]._id}');">Delete</a>
+      </div>
     `;
 
     var editUser = document.getElementById('editUser');
@@ -107,7 +110,7 @@ function viewUser(who){
 
       //Be sure to add a ajson header to form, otherwise body parser will freak out
       xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
+      console.log(data);
       //Convert formData to JSON
       var object = {};
       formData.forEach(function(value, key){
@@ -184,6 +187,24 @@ function createUser(){
       }
     }
   });
+}
+
+function deleteUser(userId){
+
+  if (window.confirm("Are you sure you want to delete this user?")) {
+    var url = 'http://localhost:3000/api/users/delete/' + userId;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url);
+    xhr.send();
+    xhr.onload = function(){
+    let data = JSON.parse(xhr.response);
+
+      if(data.success == true){
+        viewIndex();
+      }
+    }
+  }
 }
 
 //Onload view index
