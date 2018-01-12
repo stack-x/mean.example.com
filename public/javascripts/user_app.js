@@ -92,6 +92,7 @@ function viewUser(who){
         </div>
         <input type="submit" value="Submit">
       </form>
+      
       <div class="delete">
         <a href="#delete" onclick="deleteUser('${data.user[0]._id}');">Delete</a>
       </div>
@@ -192,11 +193,13 @@ function createUser(){
 function deleteUser(userId){
 
   if (window.confirm("Are you sure you want to delete this user?")) {
+
     var url = 'http://localhost:3000/api/users/delete/' + userId;
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url);
     xhr.send();
+
     xhr.onload = function(){
     let data = JSON.parse(xhr.response);
 
@@ -204,6 +207,7 @@ function deleteUser(userId){
         viewIndex();
       }
     }
+
   }
 }
 
