@@ -54,7 +54,6 @@ function viewUser(who){
 
     var app = document.getElementById('app');
 
-
     let data = JSON.parse(xhr.response);
 
     app.innerHTML = `<h2>${data.user[0].last_name}, ${data.user[0].first_name}</h2>
@@ -92,7 +91,7 @@ function viewUser(who){
         </div>
         <input type="submit" value="Submit">
       </form>
-      
+
       <div class="delete">
         <a href="#delete" onclick="deleteUser('${data.user[0]._id}');">Delete</a>
       </div>
