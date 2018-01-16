@@ -12,6 +12,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var posts = require('./routes/posts');
 var auth = require('./routes/auth');
 var apiUsers = require('./routes/api/users');
 var apiPosts = require('./routes/api/posts');
@@ -188,6 +189,7 @@ app.use(function(req,res,next){
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/posts', posts);
 app.use('/auth', auth);
 app.use('/api/users', apiUsers);
 app.use('/api/posts', apiPosts);

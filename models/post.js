@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-  uniqueValidator = require('mongoose-unique-validator');
+  uniqueValidator = require('mongoose-unique-validator'),
+  slug = require('slug');
 
 //Create a schema
 var Post = new Schema({
@@ -21,6 +22,12 @@ var Post = new Schema({
     default: Date.now
   }
 });
+
+Post.pre('validate', function(next){
+  this.slug = slug(this.title).toLowerCase();
+  next();
+});
+
 
 Post.plugin(uniqueValidator);
 
