@@ -44,7 +44,7 @@ app.use(require('express-session')({
   saveUninitialized: false,
   cookie: {
     path: '/',
-    domain: 'loc.mean.example.com',
+    domain: 'localhost:3000',
     //domain: 'localhost',
     //httpOnly: true,
     //secure: true,
@@ -79,7 +79,7 @@ passport.use(User.createStrategy());
 passport.use(new GitHubStrategy({
     clientID:'7e787b757d47bded93e6',
     clientSecret:'65d86f8118ef2f5cc3ced6213fb8bddd0337e3f7',
-    callbackURL: 'http://loc.mean.example.com/auth/github/callback'
+    callbackURL: 'http://localhost:3000/auth/github/callback'
   },function(accessToken, refreshToken, profile, cb){
 
     //The ID MUST be cast to an INT
