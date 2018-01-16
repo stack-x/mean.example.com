@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
 var passport = require('passport');
-var GitHubStrategy = require('passport-github2').Strategy;
+var GitHubStrategy = require('passport-github').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 
 var index = require('./routes/index');
