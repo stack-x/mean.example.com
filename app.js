@@ -44,7 +44,8 @@ app.use(require('express-session')({
   saveUninitialized: false,
   cookie: {
     path: '/',
-    domain: 'localhost',
+    domain: 'loc.mean.example.com',
+    //domain: 'localhost',
     //httpOnly: true,
     //secure: true,
     maxAge: 1000 * 60 * 24 // 24 hours
@@ -55,12 +56,30 @@ app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+/*
+//Set up CORS and proper
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+
+    if ('OPTIONS' == req.method) {
+         res.send(200);
+     } else {
+         next();
+     }
+
+});
+*/
+
 passport.use(User.createStrategy());
 
 passport.use(new GitHubStrategy({
     clientID:'7e787b757d47bded93e6',
     clientSecret:'65d86f8118ef2f5cc3ced6213fb8bddd0337e3f7',
-    callbackURL: 'http://localhost:3000/auth/github/callback'
+    callbackURL: 'http://loc.mean.example.com/auth/github/callback'
   },function(accessToken, refreshToken, profile, cb){
 
     //The ID MUST be cast to an INT
