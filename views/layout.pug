@@ -4,4 +4,22 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    
+    nav
+      a(href="/") Home
+      |&nbsp;|&nbsp;
+      
+      if session.user.id
+        
+        a(href="/users") Users
+        |&nbsp;|&nbsp;
+        a(href="/users/logout") Log Out
+        
+      else
+        
+        a(href="/users/login") Log In
+            
+    main
+      block content
+        
+    script(defer, src="https://use.fontawesome.com/releases/v5.0.4/js/all.js")

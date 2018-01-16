@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+  h1= title
+
+  a.button(href="#users" onclick="viewIndex()") All Posts
+  span &nbsp;&nbsp;
+  a.button(href="#create" onclick="createUser()") Create
+
+  div#app
+    
+  script(src='/javascripts/post_app.js')

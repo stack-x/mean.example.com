@@ -14,6 +14,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
 var apiUsers = require('./routes/api/users');
+var apiPosts = require('./routes/api/posts');
 
 var app = express();
 
@@ -44,7 +45,7 @@ app.use(require('express-session')({
   saveUninitialized: false,
   cookie: {
     path: '/',
-    domain: 'localhost:3000',
+    domain: 'localhost',
     //domain: 'localhost',
     //httpOnly: true,
     //secure: true,
@@ -132,10 +133,19 @@ passport.deserializeUser(function(user, done){
 
 //Create the session
 app.use(function(req, res, next){
-  var userSession='';
+
+  var userSession={};
+
   if(req.isAuthenticated()){
     userSession = req.session.passport.user;
   }
+
+  req.app.locals = {
+    session: {
+      user: userSession
+    }
+  }
+
   next();
 });
 
@@ -143,6 +153,7 @@ app.use(function(req,res,next){
 
   let whitelist = [
     '/',
+    '/favicon.ico',
     '/public',
     '/users/login',
     '/users/register',
@@ -170,13 +181,16 @@ app.use(function(req,res,next){
     return next();
   }
 
-  return res.redirect('/');
+  res.status(401);
+  return res.send('unauthorized');
+  //return res.redirect('/users/login');
 });
 
 app.use('/', index);
 app.use('/users', users);
 app.use('/auth', auth);
 app.use('/api/users', apiUsers);
+app.use('/api/posts', apiPosts);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
