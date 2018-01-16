@@ -21,7 +21,10 @@ var User = new Schema({
   admin: {
     type: Boolean,
     default: false
-  }
+  },
+  githubData: {
+    type: Object
+  },
 });
 
 User.plugin(passportLocalMongoose);

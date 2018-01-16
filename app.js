@@ -63,32 +63,25 @@ passport.use(new GitHubStrategy({
     callbackURL: 'http://localhost:3000/auth/github/callback'
   },function(accessToken, refreshToken, profile, cb){
 
-
-    User.findOne({'githubData.id': profile.id }, function (err, user) {
+    //The ID MUST be cast to an INT
+    User.findOne({"githubData.id":parseInt(profile.id)}, function (err, user) {
 
       if(err) return done(err);
 
       if(user) {
 
-        if(user.githubData == undefined){
-          user.githubData = profile._json;
-          user.save(function(err) {
-            if(err){
-              throw err;
-            }
-          });
-        }
-
+        //TODO update the githubData
         return cb(err, user);
 
       } else {
 
         var newUser = new User();
-        newUser.githubData = profile._json.login;
-        newUser.email = profile._json.email;
-        newUser.username = profile._json.login;
+        newUser.githubData = profile._json;
 
-        newUser.save(function(err) {
+        //When creating from a third party skip validation as we do not want to
+        //try and guess those fields
+        //TODO send the user to a page for supplying a username and email
+        newUser.save({ validateBeforeSave: false }, function(err) {
 
             if(err){
               throw err;
@@ -96,6 +89,7 @@ passport.use(new GitHubStrategy({
 
             return cb(err, newUser);
         });
+
       }
     });
 
@@ -141,13 +135,13 @@ app.use(function(req,res,next){
     return next();
   }
 
-  //Allow access to blog posts
+  //Allow access to dynamic end points
   var subs = [
     '/posts/view/',
     '/auth/github/callback'
   ];
 
-  for(sub of subs){
+  for(var sub of subs){
     if(req.url.substring(0, sub.length)===sub){
       return next();
     }
