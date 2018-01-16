@@ -24,7 +24,6 @@ function viewIndex(){
           <td>${username}</td>
           <td>${email}</td>
         </tr>`;
-
       }
 
       var app = document.getElementById('app');
