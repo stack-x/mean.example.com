@@ -73,8 +73,8 @@ function viewUser(who){
 
           <div class="mdl-card__menu">
             <button id="menu-actions" class="mdl-button mdl-js-button mdl-button--icon">
-              <i class="material-icons">more_vert</i>
-              <!-- <i class="fas fa-ellipsis-h material-icons" role="presentation" data-fa-transform="rotate-90"></i> -->
+              <!--<i class="material-icons">more_vert</i>-->
+              <i class="fas fa-ellipsis-h material-icons" role="presentation" data-fa-transform="rotate-90"></i>
             </button>
             <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-actions">
               <li class="mdl-menu__item">
