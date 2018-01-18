@@ -1,6 +1,35 @@
-/* SITEWIDE CSS */
+.lower-right {
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  margin-right: 40px;
+  margin-bottom: 40px;
+  z-index: 900; }
+
 .content {
-  width: 720px;
-  margin: 100px 300px; }
+  width: 800px;
+  max-width: 100%;
+  margin: 0 auto; }
+
+.user-card.user-card.mdl-card__title {
+  margin: 0;
+  padding: 0; }
+
+.avatar {
+  border-radius: 50%;
+  margin-right: 24px; }
+
+.full-width {
+  width: 100%; }
+
+.flex-box {
+  display: flex; }
+
+.flex-item-grow {
+  flex: 1; }
+
+.flex-item-grow {
+  flex: 1; }
 
 /*# sourceMappingURL=main.css.map */

@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var md5 = require('md5');
 
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -139,6 +140,7 @@ app.use(function(req, res, next){
 
   if(req.isAuthenticated()){
     userSession = req.session.passport.user;
+    userSession.avatar_url = 'https://www.gravatar.com/avatar/' + md5(userSession.email);
   }
 
   req.app.locals = {

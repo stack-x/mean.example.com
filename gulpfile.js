@@ -38,6 +38,7 @@ gulp.task('default', ['watch']);
 gulp.task('build-css', function(){
   var full = gulp.src([
     'node_modules/material-design-lite/material.min.css',
+    'public/src/scss/demo.scss',
     'public/src/scss/main.scss'
   ])
   . pipe(scss())
@@ -46,6 +47,7 @@ gulp.task('build-css', function(){
 
   var min = gulp.src([
     'node_modules/material-design-lite/material.min.css',
+    'public/src/scss/demo.scss',
     'public/src/scss/main.scss'
   ])
   . pipe(scss())

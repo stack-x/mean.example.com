@@ -20,23 +20,34 @@ function viewIndex(){
         let email=thisn.email;
 
         rows = rows + `<tr>
-          <td><a href="#edit-${id}" onclick="viewUser('${id}')">${name}</a></td>
-          <td>${username}</td>
-          <td>${email}</td>
+          <td class="mdl-data-table__cell--non-numeric"><a href="#edit-${id}" onclick="viewUser('${id}')">${name}</a></td>
+          <td class="mdl-data-table__cell--non-numeric">${username}</td>
+          <td class="mdl-data-table__cell--non-numeric">${email}</td>
         </tr>`;
       }
 
       var app = document.getElementById('app');
-      app.innerHTML = `<table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Username</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>${rows}</tbody>
-      </table>`;
+      app.innerHTML = `
+        <div class="content">
+
+        <div class="mdl-card mdl-shadow--2dp full-width">
+          <div class="mdl-card__supporting-text">
+            <div class="user-card mdl-card__title">
+              <div class="mdl-card__title-text">Users</div>
+            </div>
+          </div>
+          <table class="mdl-data-table mdl-js-data-table full-width">
+            <thead>
+              <tr>
+                <th class="mdl-data-table__cell--non-numeric">Name</th>
+                <th class="mdl-data-table__cell--non-numeric">Username</th>
+                <th class="mdl-data-table__cell--non-numeric">Email</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      `;
   }
 }
 
@@ -55,45 +66,75 @@ function viewUser(who){
 
     let data = JSON.parse(xhr.response);
 
-    app.innerHTML = `<h2>${data.user[0].last_name}, ${data.user[0].first_name}</h2>
-      <table class="table">
-        <tbody>
-          <tr><th>ID </th><td>${data.user[0]._id}</td></tr>
-          <tr><th>First Name </th><td>${data.user[0].first_name}</td></tr>
-          <tr><th>Last Name </th><td>${data.user[0].last_name}</td></tr>
-          <tr><th>Username </th><td>${data.user[0].username}</td></tr>
-          <tr><th>Email </th><td>${data.user[0].email}</td></tr>
-        </tbody>
-      </table>
+    app.innerHTML = `
+      <div class="content">
 
-      <h3>Edit the User Record</h3>
-      <form id="editUser" action="/users/edit" method="post">
-        <input type="hidden" name="_id" value="${data.user[0]._id}">
-        <div>
-          <label for="username">Username</label>
-          <input type="text" value="${data.user[0].username}" name="username" id="username">
+        <div class="mdl-card mdl-shadow--2dp full-width">
+
+          <div class="mdl-card__menu">
+            <button id="menu-actions" class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">more_vert</i>
+              <!-- <i class="fas fa-ellipsis-h material-icons" role="presentation" data-fa-transform="rotate-90"></i> -->
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="menu-actions">
+              <li class="mdl-menu__item">
+                <a href="#delete" onclick="deleteUser('${data.user[0]._id}');">Delete</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mdl-card__supporting-text flex-box">
+            <div class="flex-item-avatar">
+              <img class="avatar" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=128&f=y">
+            </div>
+            <div class="flex-item-grow">
+              <div class="user-card mdl-card__title">
+                <div class="mdl-card__title-text">${data.user[0].first_name} ${data.user[0].last_name}</div>
+              </div>
+              <div>${data.user[0].username}</div>
+              <div>${data.user[0].email}</div>
+            </div>
+          </div>
         </div>
 
-        <div>
-          <label for="email">Email</label>
-          <input type="text" value="${data.user[0].email}" name="email" id="email">
+        <div class="mdl-card mdl-shadow--2dp full-width">
+          <div class="mdl-card__supporting-text">
+            <div class="user-card mdl-card__title">
+              <div class="mdl-card__title-text">Edit</div>
+            </div>
+
+            <form id="editUser" action="/api/users/edit" method="post">
+              <input value="${data.user[0].first_name}" type="hidden" name="id" value="${data.user[0].id}">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+                <input class="mdl-textfield__input" value="${data.user[0].first_name}" type="text" name="first_name" id="first_name">
+                <label class="mdl-textfield__label" for="first_name">First Name</label>
+              </div>
+
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+                <input class="mdl-textfield__input" value="${data.user[0].last_name}" type="text" name="last_name" id="last_name">
+                <label class="mdl-textfield__label" for="last_name">Last Name</label>
+              </div>
+
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+                <input class="mdl-textfield__input" value="${data.user[0].username}" type="text" name="username" id="username">
+                <label class="mdl-textfield__label" for="username">Username</label>
+              </div>
+
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+                <input class="mdl-textfield__input" value="${data.user[0].email}" type="text" name="email" id="email">
+                <label class="mdl-textfield__label" for="email">Email</label>
+              </div>
+
+              <div>
+                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+              </div>
+            </form>
+          </div>
         </div>
 
-        <div>
-          <label for="first_name">First Name</label>
-          <input type="text" value="${data.user[0].first_name}" name="first_name" id="first_name">
-        </div>
-
-        <div>
-          <label for="last_name">Last Name</label>
-          <input type="text" value="${data.user[0].last_name}" name="last_name" id="last_name">
-        </div>
-        <input type="submit" value="Submit">
-      </form>
-
-      <div class="delete">
-        <a href="#delete" onclick="deleteUser('${data.user[0]._id}');">Delete</a>
       </div>
+
+    </div>
     `;
 
     var editUser = document.getElementById('editUser');
@@ -109,7 +150,7 @@ function viewUser(who){
 
       //Be sure to add a ajson header to form, otherwise body parser will freak out
       xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-      console.log(data);
+      //console.log(data);
       //Convert formData to JSON
       var object = {};
       formData.forEach(function(value, key){
@@ -134,29 +175,44 @@ function createUser(){
 
   var app = document.getElementById('app');
 
-  app.innerHTML = `<h2>Create a New User</h2>
-    <form id="createUser" action="/api/users/create" method="post">
-      <div>
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username">
+  app.innerHTML = `
+    <div class="content">
+    <div class="mdl-card mdl-shadow--2dp full-width">
+      <div class="mdl-card__supporting-text">
+      <div class="user-card mdl-card__title">
+        <div class="mdl-card__title-text">Create a New User</div>
       </div>
 
-      <div>
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email">
-      </div>
+        <form id="createUser" action="/users/create" method="post">
 
-      <div>
-        <label for="first_name">First Name</label>
-        <input type="text" name="first_name" id="first_name">
-      </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+            <input class="mdl-textfield__input" type="text" id="first_name">
+            <label class="mdl-textfield__label" for="first_name">First Name</label>
+          </div>
 
-      <div>
-        <label for="last_name">Last Name</label>
-        <input type="text" name="last_name" id="last_name">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+            <input class="mdl-textfield__input"  type="text" name="last_name" id="last_name">
+            <label class="mdl-textfield__label" for="last_name">Last Name</label>
+          </div>
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+            <input class="mdl-textfield__input" type="text" name="username" id="username">
+            <label class="mdl-textfield__label" for="username">Username</label>
+          </div>
+
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-dirty">
+            <input class="mdl-textfield__input" type="text" name="email" id="email">
+            <label class="mdl-textfield__label" for="email">Email</label>
+          </div>
+
+          <div>
+            <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+          </div>
+
+        </form>
       </div>
-      <input type="submit" value="Submit">
-    </form>`;
+    </div>
+  `;
 
   var createUser = document.getElementById('createUser');
   createUser.addEventListener('submit', function(e){

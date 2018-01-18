@@ -1,11 +1,10 @@
 extends ../layout
 
 block content
+  .grid
+    div#app.mdl-cell--12-col.mdl-grid
+      
+    a(href="#create", onclick="createUser()", class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored lower-right")
+      i(class="fas fa-plus material-icons")
 
-  a.button(href="#users" onclick="viewIndex()") All Users
-  span &nbsp;&nbsp;
-  a.button(href="#create" onclick="createUser()") Create
-
-  div#app
-    
   script(src='/dist/js/apps/users.min.js')
