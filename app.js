@@ -148,6 +148,8 @@ app.use(function(req, res, next){
 });
 
 app.use(function(req,res,next){
+  
+  return next();
 
   let whitelist = [
     '/',
