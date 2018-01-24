@@ -17,7 +17,7 @@ router.get('/', function(req, res){
 router.get('/view/:userId', function(req,res){
   var userId = req.params.userId;
 
-  User.find({'_id':userId}, function(err, user){
+  User.findOne({'_id':userId}, function(err, user){
 
     if(err){
       return res.json({'success':false, 'error': err});
