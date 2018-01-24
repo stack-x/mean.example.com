@@ -58,8 +58,6 @@ app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-/*
 //Set up CORS and proper
 app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Credentials', true);
@@ -74,7 +72,6 @@ app.use(function(req, res, next) {
      }
 
 });
-*/
 
 passport.use(User.createStrategy());
 
