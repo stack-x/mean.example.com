@@ -17,8 +17,8 @@ router.get('/', function(req, res){
 router.get('/view/:slug', function(req,res){
 
   var slug = req.params.slug;
-  
-  Post.find({'slug':slug}, function(err, post){
+
+  Post.findOne({'slug':slug}, function(err, post){
 
     if(err){
       return res.json({'success':false, 'error': err});
@@ -41,7 +41,7 @@ router.post('/create', function(req, res) {
     published: req.body.published
   }), function(err, post){
     if(err){
-      return res.json({success: false, post: req.body, errors: err});
+      return res.json({success: false, post: req.body, error: err});
     }
 
     return res.json({success: true, post: post});
