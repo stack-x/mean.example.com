@@ -39,7 +39,7 @@ router.post('/create', function(req, res) {
     last_name: req.body.last_name
   }), function(err, user){
     if(err){
-      return res.json({success: false, user: req.body, errors: err});
+      return res.json({success: false, user: req.body, error: err});
     }
 
     return res.json({success: true, user: user});
@@ -101,7 +101,7 @@ router.post('/register', function(req,res){
   }), input.password, function(err, user){
 
     if(err){
-      return res.json({success: false, user: req.body, errors: err});
+      return res.json({success: false, user: req.body, error: err});
     }
 
     return res.json({success: true, user: user});
