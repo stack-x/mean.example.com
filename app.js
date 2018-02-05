@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var config = require('../config.js');
+
 var mongoose = require('mongoose');
 var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
@@ -22,7 +24,7 @@ var app = express();
 var User = require('./models/user');
 
 //Connect to MongoDB
-mongoose.connect('mongodb://localhost/bootcamp');
+mongoose.connect(config.mongodb);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -148,7 +150,7 @@ app.use(function(req, res, next){
 });
 
 app.use(function(req,res,next){
-  
+
   return next();
 
   let whitelist = [
