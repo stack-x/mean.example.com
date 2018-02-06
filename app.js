@@ -151,8 +151,6 @@ app.use(function(req, res, next){
 
 app.use(function(req,res,next){
 
-  return next();
-
   let whitelist = [
     '/',
     '/favicon.ico',
@@ -183,9 +181,7 @@ app.use(function(req,res,next){
     return next();
   }
 
-  res.status(401);
-  return res.send('unauthorized');
-  //return res.redirect('/users/login');
+  return res.redirect('/users/login');
 });
 
 app.use('/', index);
