@@ -80,7 +80,7 @@ passport.use(User.createStrategy());
 passport.use(new GitHubStrategy({
     clientID:'7e787b757d47bded93e6',
     clientSecret:'65d86f8118ef2f5cc3ced6213fb8bddd0337e3f7',
-    callbackURL: 'https://jasonsnider.com/auth/github/callback'
+    callbackURL: 'https://jasonsnider.net/auth/github/callback'
   },function(accessToken, refreshToken, profile, cb){
 
     //The ID MUST be cast to an INT
