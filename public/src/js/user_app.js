@@ -1,5 +1,5 @@
 function viewIndex(){
-  var url = 'http://localhost:3000/api/users';
+  var url = 'https://jasonsnider.com/api/users';
 
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url);
@@ -44,7 +44,7 @@ function viewIndex(){
 
 function viewUser(who){
 
-  var url = 'http://localhost:3000/api/users/view/' + who;
+  var url = 'https://jasonsnider.com/api/users/view/' + who;
 
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url);
@@ -103,7 +103,7 @@ function viewUser(who){
       e.preventDefault();
 
       formData = new FormData(editUser);
-      var url = 'http://localhost:3000/api/users/edit';
+      var url = 'https://jasonsnider.com/api/users/edit';
 
       var xhr = new XMLHttpRequest();
       xhr.open('POST', url);
@@ -164,7 +164,7 @@ function createUser(){
     e.preventDefault();
 
     formData = new FormData(createUser);
-    var url = 'http://localhost:3000/api/users/create';
+    var url = 'https://jasonsnider.com/api/users/create';
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
@@ -193,7 +193,7 @@ function deleteUser(userId){
 
   if (window.confirm("Are you sure you want to delete this user?")) {
 
-    var url = 'http://localhost:3000/api/users/delete/' + userId;
+    var url = 'https://jasonsnider.com/api/users/delete/' + userId;
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url);
