@@ -1,6 +1,5 @@
 function viewIndex(){
-  var url = 'https://jasonsnider.com
-/api/posts';
+  var url = 'https://jasonsnider.com/api/posts';
 
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url);
@@ -45,8 +44,7 @@ function viewIndex(){
 
 function viewPost(postId){
 
-  var url = 'https://jasonsnider.com
-/api/posts/view/' + postId;
+  var url = 'https://jasonsnider.com/api/posts/view/' + postId;
 
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url);
@@ -55,7 +53,7 @@ function viewPost(postId){
   xhr.onload = function(){
 
     var app = document.getElementById('app');
-
+console.log(xhr.response);
     let data = JSON.parse(xhr.response);
 
     app.innerHTML = `<h2>${data.post[0].title}</h2>
@@ -109,8 +107,7 @@ function viewPost(postId){
       e.preventDefault();
 
       formData = new FormData(editPost);
-      var url = 'https://jasonsnider.com
-/api/posts/edit';
+      var url = 'https://jasonsnider.com/api/posts/edit';
 
       var xhr = new XMLHttpRequest();
       xhr.open('POST', url);
@@ -172,8 +169,7 @@ function createPost(){
     e.preventDefault();
 
     formData = new FormData(createPost);
-    var url = 'https://jasonsnider.com
-/api/posts/create';
+    var url = 'https://jasonsnider.com/api/posts/create';
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
@@ -202,8 +198,7 @@ function deletePost(postId){
 
   if (window.confirm("Are you sure you want to delete this post?")) {
 
-    var url = 'https://jasonsnider.com
-/api/posts/delete/' + postId;
+    var url = 'https://jasonsnider.com/api/posts/delete/' + postId;
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url);
