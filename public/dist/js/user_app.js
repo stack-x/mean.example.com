@@ -56,44 +56,44 @@ function viewUser(who){
 
     let data = JSON.parse(xhr.response);
 
-    app.innerHTML = `<h2>${data.user[0].last_name}, ${data.user[0].first_name}</h2>
+    app.innerHTML = `<h2>${data.user.last_name}, ${data.user.first_name}</h2>
       <table class="table">
         <tbody>
-          <tr><th>ID </th><td>${data.user[0]._id}</td></tr>
-          <tr><th>First Name </th><td>${data.user[0].first_name}</td></tr>
-          <tr><th>Last Name </th><td>${data.user[0].last_name}</td></tr>
-          <tr><th>Username </th><td>${data.user[0].username}</td></tr>
-          <tr><th>Email </th><td>${data.user[0].email}</td></tr>
+          <tr><th>ID </th><td>${data.user._id}</td></tr>
+          <tr><th>First Name </th><td>${data.user.first_name}</td></tr>
+          <tr><th>Last Name </th><td>${data.user.last_name}</td></tr>
+          <tr><th>Username </th><td>${data.user.username}</td></tr>
+          <tr><th>Email </th><td>${data.user.email}</td></tr>
         </tbody>
       </table>
 
       <h3>Edit the User Record</h3>
       <form id="editUser" action="/users/edit" method="post">
-        <input type="hidden" name="_id" value="${data.user[0]._id}">
+        <input type="hidden" name="_id" value="${data.user._id}">
         <div>
           <label for="username">Username</label>
-          <input type="text" value="${data.user[0].username}" name="username" id="username">
+          <input type="text" value="${data.user.username}" name="username" id="username">
         </div>
 
         <div>
           <label for="email">Email</label>
-          <input type="text" value="${data.user[0].email}" name="email" id="email">
+          <input type="text" value="${data.user.email}" name="email" id="email">
         </div>
 
         <div>
           <label for="first_name">First Name</label>
-          <input type="text" value="${data.user[0].first_name}" name="first_name" id="first_name">
+          <input type="text" value="${data.user.first_name}" name="first_name" id="first_name">
         </div>
 
         <div>
           <label for="last_name">Last Name</label>
-          <input type="text" value="${data.user[0].last_name}" name="last_name" id="last_name">
+          <input type="text" value="${data.user.last_name}" name="last_name" id="last_name">
         </div>
         <input type="submit" value="Submit">
       </form>
 
       <div class="delete">
-        <a href="#delete" onclick="deleteUser('${data.user[0]._id}');">Delete</a>
+        <a href="#delete" onclick="deleteUser('${data.user._id}');">Delete</a>
       </div>
     `;
 
@@ -218,11 +218,11 @@ if(hash){
 
   let chunks = hash.split('-');
 
-  if(chunks[0]=='edit'){
+  if(chunks=='edit'){
     viewUser(chunks[1]);
   }
 
-  //if(chunks[0]=='create'){
+  //if(chunks=='create'){
   //  createUser();
   //}
 
