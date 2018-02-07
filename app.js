@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var helmet = require('helmet');
 
 var config = require('../config.js');
 
@@ -20,11 +21,13 @@ var apiUsers = require('./routes/api/users');
 var apiPosts = require('./routes/api/posts');
 
 var app = express();
-
 var User = require('./models/user');
 
 //Connect to MongoDB
 mongoose.connect(config.mongodb);
+
+//Hardens the server
+app.use(helmet());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,8 +52,8 @@ app.use(require('express-session')({
   cookie: {
     path: '/',
     domain: config.cookie.domain,
-    //httpOnly: true,
-    //secure: true,
+    httpOnly: true,
+    secure: true,
     maxAge: 1000 * 60 * 24 // 24 hours
   }
 }));
