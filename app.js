@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var helmet = require('helmet');
+var compression = require('compression');
 
 var config = require('../config.js');
 
@@ -28,6 +29,9 @@ mongoose.connect(config.mongodb);
 
 //Hardens the server
 app.use(helmet());
+
+//Compress all responses
+app.use(compression());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
